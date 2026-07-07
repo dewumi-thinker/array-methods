@@ -2290,6 +2290,162 @@ console.log(markov);
 let currentIndex = 0;
 let filteredQuestions = [...questions];
 let answerRevealed = false;
+let currentUser = null;
+let userProgress = { currentIndex: 0, answers: {}, lastQuestionId: null };
+
+function getStorageKey(name) {
+  return 'arrayMastery_' + name;
+}
+
+function loadAllUsers() {
+  try {
+    const raw = localStorage.getItem('arrayMastery_users');
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveAllUsers(users) {
+  localStorage.setItem('arrayMastery_users', JSON.stringify(users));
+}
+
+function loadUserData(name) {
+  try {
+    const raw = localStorage.getItem(getStorageKey(name));
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+function saveUserData(name, data) {
+  localStorage.setItem(getStorageKey(name), JSON.stringify(data));
+}
+
+function handleNameSubmit() {
+  const input = document.getElementById('nameInput');
+  const name = input.value.trim();
+  if (!name) {
+    document.getElementById('nameError').style.display = 'block';
+    return;
+  }
+  document.getElementById('nameError').style.display = 'none';
+  startSession(name);
+}
+
+function startSession(name) {
+  currentUser = name;
+  document.getElementById('nameOverlay').classList.add('hidden');
+
+  const saved = loadUserData(name);
+  const users = loadAllUsers();
+  users[name] = (users[name] || 0) + 1;
+  saveAllUsers(users);
+
+  if (saved) {
+    userProgress = saved;
+    applyFilters();
+    if (saved.currentIndex > 0) {
+      currentIndex = Math.min(saved.currentIndex, filteredQuestions.length - 1);
+    }
+  } else {
+    userProgress = { currentIndex: 0, answers: {}, lastQuestionId: null };
+    currentIndex = 0;
+  }
+
+  document.getElementById('userBadge').textContent = name;
+  render();
+  saveProgress();
+}
+
+function saveProgress() {
+  if (!currentUser) return;
+  userProgress.currentIndex = currentIndex;
+  userProgress.lastQuestionId = filteredQuestions[currentIndex] ? filteredQuestions[currentIndex].id : null;
+  saveUserData(currentUser, userProgress);
+}
+
+function showNameOverlay() {
+  document.getElementById('nameOverlay').classList.remove('hidden');
+  const savedUsersDiv = document.getElementById('savedUsers');
+  const list = document.getElementById('savedUsersList');
+  const users = loadAllUsers();
+  const names = Object.keys(users).filter(n => n !== currentUser);
+  if (names.length > 0) {
+    savedUsersDiv.style.display = 'block';
+    list.innerHTML = names.map(n =>
+      '<button class="saved-user-btn" onclick="startSession(\'' + n.replace(/'/g, "\\'") + '\')">' +
+      n + '<span class="sub">' + (loadUserData(n) ? 'resume' : 'new') + '</span></button>'
+    ).join('');
+  } else {
+    savedUsersDiv.style.display = 'none';
+  }
+  document.getElementById('nameInput').value = '';
+}
+
+function clearAllData() {
+  if (!confirm('Clear all saved progress for all users?')) return;
+  const users = loadAllUsers();
+  Object.keys(users).forEach(name => {
+    try { localStorage.removeItem(getStorageKey(name)); } catch {}
+  });
+  localStorage.removeItem('arrayMastery_users');
+  document.getElementById('savedUsersList').innerHTML = '';
+  document.getElementById('savedUsers').style.display = 'none';
+  currentUser = null;
+  userProgress = { currentIndex: 0, answers: {}, lastQuestionId: null };
+  currentIndex = 0;
+  applyFilters();
+}
+
+function trackAnswer(questionId, isCorrect) {
+  if (!currentUser) return;
+  userProgress.answers[questionId] = isCorrect ? 'correct' : 'wrong';
+  updateStats();
+  saveProgress();
+}
+
+function updateStats() {
+  if (!currentUser) return;
+  const answers = Object.values(userProgress.answers);
+  const answered = answers.length;
+  const correct = answers.filter(a => a === 'correct').length;
+  document.getElementById('answeredCount').textContent = answered;
+  document.getElementById('correctCount').textContent = correct;
+}
+
+function restoreAnswerState(q) {
+  if (!currentUser || !userProgress.answers[q.id]) return;
+
+  const feedback = document.getElementById("quizFeedback");
+  const status = userProgress.answers[q.id];
+  const isCorrect = status === 'correct';
+
+  if (q.answerType === "multiple-choice" && q.options) {
+    const allOpts = document.querySelectorAll(".quiz-option");
+    allOpts.forEach((o) => {
+      o.className = "quiz-option";
+      o.disabled = true;
+      if (q.options[parseInt(o.dataset.idx)] === q.correctAnswer) {
+        o.classList.add(isCorrect ? "correct" : "reveal-correct");
+      }
+    });
+    feedback.className = "quiz-feedback show " + (isCorrect ? "correct" : "wrong");
+    feedback.innerHTML = isCorrect
+      ? "Correct! Well done."
+      : 'Not quite. The correct answer is: <span class="correct-answer">' +
+        q.correctAnswer + "</span>";
+    if (q.answerShort) {
+      feedback.innerHTML += '<div class="explanation-preview">' + q.answerShort + "</div>";
+    }
+  } else if (q.answerType === "text") {
+    feedback.className = "quiz-feedback show " + (isCorrect ? "correct" : "wrong");
+    feedback.innerHTML = isCorrect
+      ? "Correct! Well done."
+      : 'Not quite. The correct answer is: <span class="correct-answer">' +
+        q.correctAnswer + "</span>";
+    if (q.answerShort) {
+      feedback.innerHTML += '<div class="explanation-preview">' + q.answerShort + "</div>";
+    }
+  }
+}
 
 function getCategories() {
   const cats = [...new Set(questions.map((q) => q.category))];
@@ -2319,8 +2475,18 @@ function init() {
   document.getElementById("difficultyFilter").addEventListener("change", applyFilters);
   document.getElementById("categoryFilter").addEventListener("change", applyFilters);
   document.addEventListener("keydown", handleKeydown);
+  document.getElementById("nameInput").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") handleNameSubmit();
+  });
 
   applyFilters();
+
+  const users = loadAllUsers();
+  const savedNames = Object.keys(users);
+  if (savedNames.length > 0) {
+    showNameOverlay();
+  }
+  document.getElementById("nameOverlay").classList.remove("hidden");
 }
 
 function applyFilters() {
@@ -2359,10 +2525,15 @@ function render() {
 
   const q = filteredQuestions[currentIndex];
   const meta = document.getElementById("questionMeta");
+  const ansStatus = currentUser && userProgress.answers[q.id];
+  const statusBadge = ansStatus
+    ? '<span class="badge" style="background:' + (ansStatus === 'correct' ? '#065f4620;color:#34d399;border-color:#065f46' : '#7f1d1d20;color:#f87171;border-color:#7f1d1d') + '">' + ansStatus + '</span>'
+    : '';
   meta.innerHTML = `
     <span class="badge ${q.difficulty}">${q.difficulty}</span>
     <span class="badge category">${q.category}</span>
     <span class="badge id">#${q.id}</span>
+    ${statusBadge}
   `;
 
   document.getElementById("questionTitle").textContent = q.title;
@@ -2407,6 +2578,9 @@ function render() {
 
   document.getElementById("prevBtn").disabled = currentIndex === 0;
   document.getElementById("nextBtn").disabled = currentIndex === total - 1;
+
+  updateStats();
+  restoreAnswerState(q);
 }
 
 function revealAnswer() {
@@ -2457,6 +2631,7 @@ function nextQuestion() {
     currentIndex++;
     answerRevealed = false;
     render();
+    saveProgress();
   }
 }
 
@@ -2465,6 +2640,7 @@ function prevQuestion() {
     currentIndex--;
     answerRevealed = false;
     render();
+    saveProgress();
   }
 }
 
@@ -2535,6 +2711,7 @@ function selectAnswer(el, idx) {
   if (q.answerShort) {
     feedback.innerHTML += '<div class="explanation-preview">' + q.answerShort + "</div>";
   }
+  trackAnswer(q.id, isCorrect);
 }
 
 function checkTextAnswer() {
@@ -2553,6 +2730,7 @@ function checkTextAnswer() {
   if (q.answerShort) {
     feedback.innerHTML += '<div class="explanation-preview">' + q.answerShort + "</div>";
   }
+  trackAnswer(q.id, isCorrect);
 }
 
 function handleKeydown(e) {

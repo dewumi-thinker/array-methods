@@ -366,9 +366,153 @@
             border: 1px solid #334155;
         }
 
-        .stats .num {
+            .stats .num {
             color: #60a5fa;
             font-weight: 700;
+        }
+
+        .stats .user-badge {
+            background: #1e3a5f;
+            border-color: #60a5fa;
+            cursor: pointer;
+        }
+
+        .stats .user-badge:hover {
+            background: #1e3a5f80;
+        }
+
+        /* Name overlay */
+        .name-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .name-overlay.hidden {
+            display: none;
+        }
+
+        .name-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .name-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .name-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .name-card .input-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .name-card input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .name-card input:focus {
+            border-color: #60a5fa;
+        }
+
+        .name-card button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .name-card button:hover {
+            background: #1d4ed8;
+        }
+
+        .name-card .saved-users {
+            margin-top: 20px;
+            border-top: 1px solid #334155;
+            padding-top: 16px;
+        }
+
+        .name-card .saved-users p {
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            -webkit-text-fill-color: #94a3b8;
+        }
+
+        .name-card .saved-user-btn {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-align: left;
+        }
+
+        .name-card .saved-user-btn:hover {
+            border-color: #60a5fa;
+            background: #1e3a5f30;
+        }
+
+        .name-card .saved-user-btn .sub {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+
+        .name-card .error-msg {
+            color: #f87171;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .name-card .reset-link {
+            color: #64748b;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-top: 12px;
+            display: inline-block;
+            text-decoration: underline;
+        }
+
+        .name-card .reset-link:hover {
+            color: #f87171;
         }
 
         .quiz-area {
@@ -514,6 +658,26 @@
         <span>Easy: <span class="num" id="easyCount">0</span></span>
         <span>Medium: <span class="num" id="mediumCount">0</span></span>
         <span>Hard: <span class="num" id="hardCount">0</span></span>
+        <span>Answered: <span class="num" id="answeredCount">0</span></span>
+        <span>Correct: <span class="num" id="correctCount">0</span></span>
+        <span class="user-badge badge" id="userBadge" onclick="showNameOverlay()"></span>
+    </div>
+
+    <div class="name-overlay" id="nameOverlay">
+        <div class="name-card">
+            <h2>JavaScript Array Methods</h2>
+            <p>Enter your name to start or continue where you left off</p>
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="Your name..." maxlength="30" autocomplete="off">
+                <button onclick="handleNameSubmit()">Start</button>
+            </div>
+            <div class="error-msg" id="nameError">Please enter a name</div>
+            <div class="saved-users" id="savedUsers" style="display:none">
+                <p>Returning users:</p>
+                <div id="savedUsersList"></div>
+                <span class="reset-link" onclick="clearAllData()">Clear all saved data</span>
+            </div>
+        </div>
     </div>
 
     <div class="controls">
