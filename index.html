@@ -1,8 +1,52 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Array Mastery - 100+ Questions</title>
+    <title>arraymastery - 100+ JavaScript Array Method Practice Questions</title>
+    <meta name="description"
+        content="Master JavaScript array methods (map, filter, reduce, forEach, find, sort, and more) with 100+ real-world business scenario questions. Interactive coding practice for beginners to advanced.">
+    <meta name="keywords"
+        content="JavaScript, array methods, map, filter, reduce, forEach, coding practice, programming exercises, JS arrays, web development, learn JavaScript, coding interview prep">
+    <meta name="author" content="arraymastery">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://array-methods-by-kingsdev.netlify.app/">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="arraymastery - 100+ JavaScript Array Method Practice Questions">
+    <meta property="og:description"
+        content="Master JavaScript array methods with 100+ real-world business scenario questions. Interactive coding practice for all skill levels.">
+    <meta property="og:url" content="https://array-methods-by-kingsdev.netlify.app/">
+    <meta property="og:image" content="https://array-methods-by-kingsdev.netlify.app//logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="arraymastery - 100+ JavaScript Array Method Practice Questions">
+    <meta name="twitter:description"
+        content="Master JavaScript array methods with 100+ real-world business scenario questions. Interactive coding practice for all skill levels.">
+    <meta name="twitter:image" content="https://array-methods-by-kingsdev.netlify.app//logo.png">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "arraymastery",
+        "url": "https://array-methods-by-kingsdev.netlify.app/",
+        "description": "Master JavaScript array methods with 100+ real-world business scenario questions. Interactive coding practice for beginners to advanced.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "arraymastery"
+        }
+    }
+    </script>
     <style>
         * {
             margin: 0;
@@ -23,6 +67,20 @@
             padding: 24px 0 12px;
             border-bottom: 1px solid #1e293b;
             margin-bottom: 24px;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: contain;
         }
 
         .app-header h1 {
@@ -47,7 +105,8 @@
             justify-content: center;
         }
 
-        .controls select, .controls button {
+        .controls select,
+        .controls button {
             padding: 8px 16px;
             border-radius: 8px;
             border: 1px solid #334155;
@@ -58,7 +117,8 @@
             transition: all 0.2s;
         }
 
-        .controls select:hover, .controls button:hover {
+        .controls select:hover,
+        .controls button:hover {
             border-color: #60a5fa;
             background: #334155;
         }
@@ -366,7 +426,7 @@
             border: 1px solid #334155;
         }
 
-            .stats .num {
+        .stats .num {
             color: #60a5fa;
             font-weight: 700;
         }
@@ -404,6 +464,14 @@
             max-width: 420px;
             width: 90%;
             text-align: center;
+        }
+
+        .name-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            object-fit: contain;
         }
 
         .name-card h2 {
@@ -638,18 +706,24 @@
             body {
                 padding: 12px;
             }
+
             .card {
                 padding: 18px;
             }
+
             .question-title {
                 font-size: 1rem;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="app-header">
-        <h1>JavaScript Array Methods</h1>
+        <div class="logo-wrap">
+            <img src="logo.png" alt="arraymastery" class="logo" id="appLogo" onerror="this.style.display='none'">
+            <h1>JavaScript Array Methods</h1>
+        </div>
         <p>Master map, filter, reduce, and more with real business scenarios</p>
     </div>
 
@@ -665,6 +739,7 @@
 
     <div class="name-overlay" id="nameOverlay">
         <div class="name-card">
+            <img src="logo.png" alt="arraymastery" class="name-logo" onerror="this.style.display='none'">
             <h2>JavaScript Array Methods</h2>
             <p>Enter your name to start or continue where you left off</p>
             <div class="input-group">
@@ -702,7 +777,8 @@
         <div class="quiz-area" id="quizArea">
             <div class="quiz-options" id="quizOptions"></div>
             <div class="quiz-text-input" id="quizTextInput" style="display:none">
-                <input type="text" id="textAnswer" placeholder="Type your answer here..." autocomplete="off" spellcheck="false">
+                <input type="text" id="textAnswer" placeholder="Type your answer here..." autocomplete="off"
+                    spellcheck="false">
                 <button onclick="checkTextAnswer()">Submit</button>
             </div>
             <div class="quiz-feedback" id="quizFeedback"></div>
@@ -731,4 +807,5 @@
 
     <script src="index.js"></script>
 </body>
+
 </html>
