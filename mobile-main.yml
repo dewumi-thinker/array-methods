@@ -1,0 +1,80 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "arraymastery" [ref=e4]
+      - heading "JavaScript Array Methods" [level=1] [ref=e5]
+    - paragraph [ref=e6]: Master map, filter, reduce, and more with real business scenarios
+  - generic [ref=e7]:
+    - generic [ref=e8]: "Questions: 103"
+    - generic [ref=e9]: "Easy: 35"
+    - generic [ref=e10]: "Medium: 35"
+    - generic [ref=e11]: "Hard: 33"
+    - generic [ref=e12]: "Answered: 1"
+    - generic [ref=e13]: "Correct: 1"
+    - generic [ref=e14] [cursor=pointer]: Ore
+  - generic [ref=e28]:
+    - combobox [ref=e29] [cursor=pointer]:
+      - option "All Difficulties" [selected]
+      - option "Easy"
+      - option "Medium"
+      - option "Hard"
+    - combobox [ref=e30] [cursor=pointer]:
+      - option "All Methods" [selected]
+      - option "ForEach"
+      - option "Map"
+      - option "Filter"
+      - option "Find"
+      - option "Includes"
+      - option "IndexOf"
+      - option "Some"
+      - option "Every"
+      - option "Sort"
+      - option "Reduce"
+      - option "Push"
+      - option "Pop"
+      - option "Shift"
+      - option "Unshift"
+      - option "Slice"
+      - option "Splice"
+      - option "Concat"
+      - option "Join"
+      - option "Reverse"
+      - option "Flat"
+      - option "Array.isArray"
+      - option "Array.from"
+      - option "Array.of"
+      - option "Fill"
+      - option "Keys"
+      - option "Values"
+      - option "Entries"
+      - option "FindIndex"
+      - option "FlatMap"
+      - option "Custom"
+      - option "Chaining"
+    - generic [ref=e31]: 1 / 103
+  - generic [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e56]: easy
+      - generic [ref=e57]: forEach
+      - generic [ref=e58]: "#1"
+      - generic [ref=e59]: correct
+    - generic [ref=e37]: Log Each Product Name
+    - generic [ref=e38]:
+      - strong [ref=e60]: "Business Context:"
+      - text: You work at an e-commerce store. You need to print every product name in the catalog to the console.
+    - generic [ref=e40]: Which forEach call correctly logs each product name?
+    - generic [ref=e41]: const products = ['Laptop', 'Mouse', 'Keyboard', 'Monitor', 'Headphones'];
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - button "products.forEach(product => console.log(product))" [disabled] [ref=e61] [cursor=pointer]
+        - button "products.forEach((product, i) => console.log(i))" [disabled] [ref=e62] [cursor=pointer]
+        - button "products.forEach(() => console.log('product'))" [disabled] [ref=e63] [cursor=pointer]
+        - button "products.forEach(product => console.log('product'))" [disabled] [ref=e64] [cursor=pointer]
+      - generic [ref=e65]:
+        - text: Correct! Well done.
+        - generic [ref=e66]: forEach passes each element as the first argument to the callback.
+    - button "Show Answer" [ref=e49] [cursor=pointer]
+    - generic [ref=e50]:
+      - button "Previous" [disabled] [ref=e51]
+      - generic [ref=e52]: Question 1 of 103
+      - button "Next" [ref=e53] [cursor=pointer]

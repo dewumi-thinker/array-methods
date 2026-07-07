@@ -601,6 +601,8 @@
             transition: all 0.15s;
             text-align: left;
             font-family: 'Courier New', monospace;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         .quiz-option:hover {
@@ -702,17 +704,186 @@
             margin-top: 6px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             body {
-                padding: 12px;
+                padding: 10px;
             }
 
             .card {
-                padding: 18px;
+                padding: 14px;
+            }
+
+            .app-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .app-header p {
+                font-size: 0.8rem;
+            }
+
+            .logo {
+                width: 32px;
+                height: 32px;
+            }
+
+            .stats {
+                gap: 6px;
+                font-size: 0.75rem;
+            }
+
+            .stats span {
+                padding: 3px 8px;
+            }
+
+            .controls {
+                gap: 6px;
+            }
+
+            .controls select,
+            .controls button {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+
+            .progress-info {
+                font-size: 0.75rem;
             }
 
             .question-title {
                 font-size: 1rem;
+            }
+
+            .business-context {
+                font-size: 0.82rem;
+                padding: 10px 12px;
+            }
+
+            .question-text {
+                font-size: 0.88rem;
+            }
+
+            .code-block {
+                font-size: 0.78rem;
+                padding: 12px;
+            }
+
+            .quiz-option {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+                word-break: break-all;
+            }
+
+            .quiz-text-input {
+                flex-direction: column;
+            }
+
+            .quiz-text-input input {
+                font-size: 0.85rem;
+            }
+
+            .quiz-text-input button {
+                width: 100%;
+            }
+
+            .nav-row button {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+
+            .nav-row {
+                gap: 6px;
+            }
+
+            .name-card {
+                padding: 28px 20px;
+            }
+
+            .name-card h2 {
+                font-size: 1.2rem;
+            }
+
+            .name-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .name-card .input-group {
+                flex-direction: column;
+            }
+
+            .name-card .input-group button {
+                width: 100%;
+            }
+
+            .code-editor-section textarea {
+                font-size: 0.78rem;
+                min-height: 100px;
+            }
+
+            .code-editor-section .btn-row {
+                flex-direction: column;
+            }
+
+            .code-editor-section .btn-row button {
+                width: 100%;
+            }
+
+            .code-output {
+                font-size: 0.78rem;
+            }
+
+            .answer-content pre {
+                font-size: 0.78rem;
+                padding: 10px;
+            }
+
+            .answer-content .explanation {
+                font-size: 0.82rem;
+            }
+
+            .question-meta {
+                gap: 6px;
+            }
+
+            .badge {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+
+            .answer-toggle {
+                font-size: 0.8rem;
+                padding: 6px 16px;
+            }
+
+            #questionIdDisplay {
+                font-size: 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .stats span {
+                padding: 2px 6px;
+                font-size: 0.7rem;
+            }
+
+            .controls select,
+            .controls button {
+                font-size: 0.7rem;
+                padding: 5px 8px;
+            }
+
+            .card {
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            .nav-row button {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+
+            .name-card {
+                padding: 20px 14px;
             }
         }
     </style>
