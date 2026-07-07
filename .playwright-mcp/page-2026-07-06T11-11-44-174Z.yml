@@ -1,0 +1,65 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - heading "JavaScript Array Methods" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Master map, filter, reduce, and more with real business scenarios
+  - generic [ref=e5]:
+    - generic [ref=e6]: "Questions: 103"
+    - generic [ref=e7]: "Easy: 35"
+    - generic [ref=e8]: "Medium: 35"
+    - generic [ref=e9]: "Hard: 33"
+  - generic [ref=e10]:
+    - combobox [ref=e11] [cursor=pointer]:
+      - option "All Difficulties" [selected]
+      - option "Easy"
+      - option "Medium"
+      - option "Hard"
+    - combobox [ref=e12] [cursor=pointer]:
+      - option "All Methods" [selected]
+      - option "ForEach"
+      - option "Map"
+      - option "Filter"
+      - option "Find"
+      - option "Includes"
+      - option "IndexOf"
+      - option "Some"
+      - option "Every"
+      - option "Sort"
+      - option "Reduce"
+      - option "Push"
+      - option "Pop"
+      - option "Shift"
+      - option "Unshift"
+      - option "Slice"
+      - option "Splice"
+      - option "Concat"
+      - option "Join"
+      - option "Reverse"
+      - option "Flat"
+      - option "Array.isArray"
+      - option "Array.from"
+      - option "Array.of"
+      - option "Fill"
+      - option "Keys"
+      - option "Values"
+      - option "Entries"
+      - option "FindIndex"
+      - option "FlatMap"
+      - option "Custom"
+      - option "Chaining"
+    - generic [ref=e13]: 2 / 103
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e37]: easy
+      - generic [ref=e38]: forEach
+      - generic [ref=e39]: "#2"
+    - generic [ref=e19]: Log Names with Index
+    - generic [ref=e20]:
+      - strong [ref=e40]: "Business Context:"
+      - text: You are building a leaderboard and need to display each player name with their rank number.
+    - generic [ref=e22]: "Use forEach to log each name with its index (rank). Format: \"1: Alice\", \"2: Bob\"..."
+    - generic [ref=e23]: const players = ['Alice', 'Bob', 'Charlie', 'Diana'];
+    - button "Show Answer" [ref=e41] [cursor=pointer]
+    - generic [ref=e26]:
+      - button "Previous" [ref=e27] [cursor=pointer]
+      - generic [ref=e28]: Question 2 of 103
+      - button "Next" [active] [ref=e29] [cursor=pointer]
